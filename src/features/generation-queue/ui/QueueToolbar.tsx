@@ -84,7 +84,7 @@ export function QueueToolbar({
           value={sort}
           onValueChange={(value) => onSortChange(value as QueueSort)}
         >
-          <SelectTrigger className='h-8.5 rounded-full bg-secondary text-[13px] text-muted-foreground text-(--c-fg-dim)'>
+          <SelectTrigger className='h-8.5 rounded-full bg-secondary text-[13px] text-(--c-fg-dim)'>
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
@@ -101,7 +101,7 @@ export function QueueToolbar({
           value={type}
           onValueChange={(value) => onTypeChange(value as GenType | 'all')}
         >
-          <SelectTrigger className='h-[34px] rounded-full bg-secondary text-[13px]'>
+          <SelectTrigger className='h-[34px] rounded-full bg-secondary text-[13px] text-(--c-fg-dim)'>
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
