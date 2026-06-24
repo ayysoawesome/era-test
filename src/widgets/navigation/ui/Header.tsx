@@ -1,4 +1,4 @@
-import { Link } from "@/shared/routing";
+import { Link, useLocation } from "@/shared/routing";
 import { Clock, Menu, Moon, Search, Sun } from "lucide-react";
 import { cn } from "@/shared/lib/utils";
 import { useTheme } from "@/features/theme-switcher";
@@ -22,10 +22,12 @@ export function Header({ onToggleSidebar, showBurger = true }: HeaderProps) {
   const { theme, toggleTheme } = useTheme();
   const { isAuthed } = useAuth();
   const { setOpen } = useCommandPalette();
+  const { pathname } = useLocation();
+  const isQueuePage = pathname === "/queue";
 
   return (
     <>
-      {!isAuthed && <PromoBanner />}
+      {!isAuthed && !isQueuePage && <PromoBanner />}
       <header className="sticky top-0 z-40 h-16 flex items-center justify-between px-4 md:px-6 bg-background/85 backdrop-blur-md border-b border-border" style={{ height: "var(--header-height)" }}>
       {/* Left: burger + logo */}
       <div className="flex items-center gap-3">
