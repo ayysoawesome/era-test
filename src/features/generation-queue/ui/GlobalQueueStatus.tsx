@@ -45,7 +45,7 @@ function TaskThumb({
       className={cn(
         'grid size-7 shrink-0 place-items-center overflow-clip rounded-lg',
         'bg-linear-to-br from-[#3B1A0A] to-[#1A1614]',
-        'font-mono text-xs text-[var(--c-accent-2)]',
+        'font-mono text-xs text-(--c-accent-2)',
         className,
       )}
       aria-hidden='true'
@@ -59,7 +59,7 @@ function StatusMark({ className }: { className?: string }) {
   return (
     <span
       className={cn(
-        'grid size-10 shrink-0 place-items-center rounded-full text-[var(--c-accent-2)]',
+        'grid size-10 shrink-0 place-items-center rounded-full text-(--c-accent-2)',
         className,
       )}
       aria-hidden='true'
@@ -76,14 +76,14 @@ function QueueTaskLine({ task }: { task: GenerationTask }) {
 
   return (
     <div className='grid grid-cols-[28px_minmax(0,1fr)_auto] items-center gap-3'>
-      <TaskThumb task={task} className='rounded-[8px]' />
+      <TaskThumb task={task} className='rounded-sm' />
       <div className='min-w-0'>
         <div className='flex min-w-0 items-center gap-2'>
-          <p className='truncate text-sm leading-5 text-[var(--c-fg)]'>
+          <p className='truncate text-sm leading-5 text-(--c-fg)'>
             {task.prompt}
           </p>
           {queued ? null : (
-            <span className='shrink-0 font-mono text-xs leading-none text-[var(--c-accent-2)]'>
+            <span className='shrink-0 font-mono text-xs leading-none text-(--c-accent-2)'>
               {task.progress}%
             </span>
           )}
@@ -93,7 +93,7 @@ function QueueTaskLine({ task }: { task: GenerationTask }) {
         )}
       </div>
       {queued ? (
-        <span className='shrink-0 text-xs leading-4 text-[var(--c-fg-mute)]'>
+        <span className='shrink-0 text-xs leading-4 text-(--c-fg-mute)'>
           в очереди
         </span>
       ) : null}
@@ -138,23 +138,23 @@ function MobileStatus({
         raised
           ? 'bottom-[calc(10.75rem+env(safe-area-inset-bottom))]'
           : 'bottom-[calc(1rem+env(safe-area-inset-bottom))]',
-        'overflow-clip rounded-[14px] border border-[rgba(232,84,32,0.58)]',
-        'bg-[rgba(25,20,18,0.96)] text-left shadow-[0_0_28px_rgba(232,84,32,0.18),0_18px_44px_rgba(0,0,0,0.55)]',
+        'overflow-clip rounded-md border border-(--c-accent)/35',
+        'bg-(--c-bg-2) text-left shadow-[0_0_28px_rgba(232,84,32,0.18),0_18px_44px_rgba(0,0,0,0.55)]',
         'transition-transform duration-200 ease-out hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-accent-2)]',
       )}
       aria-label='Открыть очередь генераций'
     >
-      <div className='flex h-[54px] items-center gap-3 px-3.5'>
+      <div className='flex h-13.5 items-center gap-3 px-3.5'>
         <StatusMark className='size-9' />
         <div className='min-w-0 flex-1'>
-          <p className='truncate text-sm font-semibold leading-5 text-[var(--c-fg)]'>
+          <p className='truncate text-sm font-semibold leading-5 text-(--c-fg)'>
             Генерации идут
           </p>
-          <p className='truncate text-xs leading-4 text-[var(--c-fg-mute)]'>
+          <p className='truncate text-xs leading-4 text-(--c-fg-mute)'>
             {activeCount} активны · {averageProgress}%
           </p>
         </div>
-        <ArrowRight className='size-4 shrink-0 text-[var(--c-accent-2)]' />
+        <ArrowRight className='size-4 shrink-0 text-(--c-accent-2)' />
       </div>
       <ProgressBar value={averageProgress} className='h-0.75 rounded-none' />
     </motion.button>
@@ -192,19 +192,19 @@ function CollapsedStatus({
       }}
       onClick={onExpand}
       className={cn(
-        'hidden h-12 items-center gap-3 rounded-full border border-[rgba(232,84,32,0.5)]',
+        'hidden h-12 items-center gap-3 rounded-full border border-(--c-accent)/35',
         'bg-[rgba(25,20,18,0.96)] px-5 text-left md:inline-flex',
         'shadow-[0_0_26px_rgba(232,84,32,0.14),0_16px_42px_rgba(0,0,0,0.55)]',
-        'transition-transform duration-200 ease-out hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-accent-2)]',
+        'transition-transform duration-200 ease-out hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--c-accent-2)',
       )}
       aria-label='Развернуть статус генераций'
     >
       <StatusMark />
-      <span className='text-base font-semibold leading-none text-[var(--c-fg)]'>
+      <span className='text-base font-semibold leading-none text-(--c-fg)'>
         {formatGenerationCount(activeCount)}
       </span>
-      <span className='text-sm leading-none text-[var(--c-accent-2)]'>·</span>
-      <span className='font-mono text-base leading-none text-[var(--c-accent-2)]'>
+      <span className='text-sm leading-none text-(--c-accent-2)'>·</span>
+      <span className='font-mono text-base leading-none text-(--c-accent-2)'>
         {averageProgress}%
       </span>
     </motion.button>
@@ -240,37 +240,37 @@ function SingleStatus({
       }}
       onClick={onOpen}
       className={cn(
-        'hidden w-[300px] max-w-[calc(100dvw-48px)] rounded-[22px] border border-[rgba(232,84,32,0.48)]',
+        'hidden w-75 max-w-[calc(100dvw-48px)] rounded-lg border border-(--c-accent)/35',
         'bg-[rgba(25,20,18,0.96)] p-5 text-left md:block',
         'shadow-[0_0_30px_rgba(232,84,32,0.14),0_22px_60px_rgba(0,0,0,0.58)]',
-        'transition-transform duration-200 ease-out hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-accent-2)]',
+        'transition-transform duration-200 ease-out hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--c-accent-2)',
       )}
       aria-label='Открыть очередь генераций'
     >
-      <div className='flex items-start gap-3'>
-        <StatusMark />
+      <div className='flex items-center gap-4'>
+        <StatusMark className='size-4.5' />
         <div className='min-w-0 flex-1'>
-          <p className='truncate text-base font-semibold leading-5 text-[var(--c-fg)]'>
+          <p className='truncate text-[13px] font-semibold leading-5 text-(--c-fg)'>
             {taskTypeLabel[task.type]}
           </p>
-          <p className='mt-1 truncate font-mono text-sm leading-4 text-[var(--c-fg-mute)]'>
+          <p className='mt-1 truncate font-mono text-[11px] leading-2.75 text-(--c-fg-mute)'>
             {task.modelName} ·{' '}
-            <span className='text-[var(--c-accent-2)]'>{task.progress}%</span>
+            <span className='text-(--c-fg-mute)'>{task.progress}%</span>
           </p>
         </div>
-        <ArrowRight className='mt-1 size-4 shrink-0 text-[var(--c-fg-mute)]' />
+        <ArrowRight className='mt-1 size-4 shrink-0 text-(--c-fg-mute)' />
       </div>
 
-      <div className='mt-5 grid grid-cols-[56px_minmax(0,1fr)] items-center gap-4'>
+      <div className='mt-5 flex items-center gap-3'>
         <TaskThumb
           task={task}
-          className='size-14 rounded-[12px] text-xl opacity-80'
+          className='size-10 rounded-[10px] text-xl opacity-80'
         />
-        <div className='min-w-0'>
-          <p className='line-clamp-2 text-base leading-6 text-[var(--c-fg-dim)]'>
+        <div className='min-w-0 w-full flex flex-col h-full gap-1'>
+          <p className='line-clamp-2 text-xs text-(--c-fg-dim)'>
             {task.prompt}
           </p>
-          <ProgressBar value={task.progress} className='mt-3 h-1.5' />
+          <ProgressBar value={task.progress} className='h-1' />
         </div>
       </div>
     </motion.button>
@@ -310,31 +310,33 @@ function MultipleStatus({
         ease: 'easeOut',
       }}
       className={cn(
-        'hidden w-[332px] max-w-[calc(100dvw-48px)] overflow-clip rounded-[22px]',
+        'hidden w-83 max-w-[calc(100dvw-48px)] overflow-clip rounded-lg',
         'border border-[rgba(232,84,32,0.46)] bg-[rgba(25,20,18,0.96)] md:block',
         'shadow-[0_0_32px_rgba(232,84,32,0.16),0_24px_64px_rgba(0,0,0,0.6)]',
       )}
       aria-label='Активные генерации'
     >
       <div className='p-4'>
-        <div className='flex items-start gap-3'>
-          <StatusMark />
-          <button
-            type='button'
-            onClick={onOpen}
-            className='min-w-0 flex-1 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-accent-2)]'
-          >
-            <p className='truncate text-sm font-semibold leading-5 text-[var(--c-fg)]'>
-              Генерации идут
-            </p>
-            <p className='truncate text-xs leading-4 text-[var(--c-fg-mute)]'>
-              {activeCount} активны · {averageProgress}%
-            </p>
-          </button>
+        <div className='flex items-center w-full justify-between'>
+          <div className='flex items-center gap-4'>
+            <StatusMark className='size-4.5' />
+            <button
+              type='button'
+              onClick={onOpen}
+              className='min-w-0 flex flex-col gap-1 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--c-accent-2)'
+            >
+              <p className='truncate text-[13px] font-semibold leading-3.25 text-(--c-fg)'>
+                Генерации идут
+              </p>
+              <p className='truncate text-[11px] leading-2.75 text-(--c-fg-mute)'>
+                {activeCount} активны · {averageProgress}%
+              </p>
+            </button>
+          </div>
           <button
             type='button'
             onClick={onCollapse}
-            className='grid size-6 shrink-0 place-items-center rounded-full text-[var(--c-fg-mute)] transition-colors hover:text-[var(--c-accent-2)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-accent-2)]'
+            className='grid size-6 shrink-0 place-items-center rounded-full text-(--c-fg-mute) transition-colors hover:text-(--c-accent-2) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--c-accent-2)'
             aria-label='Свернуть статус генераций'
           >
             <ChevronDown className='size-3.5' />
@@ -352,7 +354,7 @@ function MultipleStatus({
         <button
           type='button'
           onClick={onOpen}
-          className='mx-auto inline-flex items-center text-center gap-1.5 text-sm font-semibold leading-5 text-[var(--c-accent-2)] transition-colors hover:text-[var(--c-accent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--c-accent-2)]'
+          className='mx-auto inline-flex items-center text-center gap-1.5 text-sm font-semibold leading-5 text-(--c-accent-2) transition-colors hover:text-(--c-accent) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--c-accent-2)'
         >
           <span>Открыть очередь</span>
           <ArrowRight className='size-3.5' />
@@ -410,7 +412,7 @@ export function GlobalQueueStatus() {
               duration: prefersReducedMotion ? 0.12 : 0.2,
               ease: 'easeOut',
             }}
-            className='fixed bottom-6 right-6 z-[120] hidden md:block'
+            className='fixed bottom-6 right-6 z-120 hidden md:block'
           >
             <AnimatePresence mode='wait' initial={false}>
               {collapsed && multiple ? (
